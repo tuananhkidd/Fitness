@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVVMBaseKotlin</string>
+    <string name="error_place_holder">Error Happend.Try again!</string>
+</resources>
