@@ -99,6 +99,7 @@ open class Define {
         const val EVENING = "EVENING"
         const val USERS_COLLECTION = "user"
         const val FOODS_COLLECTION = "food"
+        const val USER_MEAL_COLLECTION = "user_meal"
         const val FOODS_MEAL_COLLECTION = "food_meal"
     }
 }

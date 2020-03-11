@@ -5,6 +5,7 @@ import com.kidd.fitness.base.BaseFragment
 import com.kidd.fitness.extension.getViewModel
 import com.kidd.fitness.extension.onAvoidDoubleClick
 import com.kidd.fitness.ui.insert_food.InertMealFragment
+import com.kidd.fitness.ui.meal.UserMealFragment
 import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : BaseFragment() {
@@ -25,6 +26,10 @@ class HomeFragment : BaseFragment() {
         viewModel = getViewModel(viewModelFactory)
         btn_insert.onAvoidDoubleClick {
             viewController.addFragment(InertMealFragment::class.java, null)
+        }
+
+        btn_today.onAvoidDoubleClick {
+            viewController.addFragment(UserMealFragment::class.java, null)
         }
     }
 

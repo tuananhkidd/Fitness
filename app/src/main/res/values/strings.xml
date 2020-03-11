@@ -11,4 +11,5 @@
     <string name="enter_food">Nhập tên món ăn</string>
     <string name="enter_calo">Nhập calo (kcal/100g)</string>
     <string name="insert_food">Hoàn tất</string>
+    <string name="enter_target_kcal">Nhập mục tiêu kcal</string>
 </resources>

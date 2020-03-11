@@ -31,7 +31,11 @@ class SplashFragment : BaseFragment() {
 
         mDisposable.add(io.reactivex.Completable.timer(2000,TimeUnit.MILLISECONDS)
             .subscribe {
-                viewController.replaceFragment(LoginFragment::class.java,null)
+                if(viewModel.isUserLogin()){
+                    viewController.replaceFragment(HomeFragment::class.java,null)
+                }else{
+                    viewController.replaceFragment(LoginFragment::class.java,null)
+                }
             })
     }
 

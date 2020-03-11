@@ -8,6 +8,7 @@ import com.kidd.fitness.ui.SplashViewModel
 import com.kidd.fitness.ui.home.HomeViewModel
 import com.kidd.fitness.ui.insert_food.InertMealViewModel
 import com.kidd.fitness.ui.login.LoginViewModel
+import com.kidd.fitness.ui.meal.UserMealViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -35,6 +36,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(InertMealViewModel::class)
     internal abstract fun bindInertMealViewModel(viewModel: InertMealViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserMealViewModel::class)
+    internal abstract fun bindUserMealViewModel(viewModel: UserMealViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
