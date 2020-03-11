@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.kidd.fitness.base.entity.BaseListLoadMoreResponse;
 import com.kidd.fitness.base.entity.BaseListResponse;
 import com.kidd.fitness.base.entity.BaseObjectResponse;
+import com.kidd.fitness.custom.LoadingDialog;
 import com.kidd.fitness.utils.Define;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public abstract class BaseFragment extends DaggerFragment {
     @Inject
     protected ViewModelProvider.Factory viewModelFactory;
 
+    private LoadingDialog loadingDialog;
     /**
      * The ViewController for control fragments in an activity
      */
@@ -45,6 +47,9 @@ public abstract class BaseFragment extends DaggerFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(getContext()!=null){
+            loadingDialog = new LoadingDialog(getContext());
+        }
         initView();
         initData();
     }
@@ -53,6 +58,14 @@ public abstract class BaseFragment extends DaggerFragment {
 
     public void setViewController(ViewController viewController) {
         this.mViewController = viewController;
+    }
+
+    public ViewController getViewController() {
+        if (mViewController == null) {
+            return ((BaseActivity) getActivity()).getViewController();
+        } else {
+            return mViewController;
+        }
     }
 
     public void setData(HashMap<String, Object> data) {
@@ -133,9 +146,15 @@ public abstract class BaseFragment extends DaggerFragment {
     }
 
     protected void showLoading() {
+        if (loadingDialog != null) {
+            loadingDialog.show();
+        }
     }
 
     protected void hideLoading() {
+        if (loadingDialog != null) {
+            loadingDialog.hide();
+        }
     }
 
     protected void getListResponse(List<?> data) {

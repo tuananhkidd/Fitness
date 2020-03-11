@@ -94,5 +94,11 @@ open class Define {
         val DEFAULT_TIMEOUT = 60L
         val CLICK_TIME_INTERVAL = 300L
 
+        const val MORNING = "MORNING"
+        const val AFTERNOON = "AFTERNOON"
+        const val EVENING = "EVENING"
+        const val USERS_COLLECTION = "user"
+        const val FOODS_COLLECTION = "food"
+        const val FOODS_MEAL_COLLECTION = "food_meal"
     }
 }

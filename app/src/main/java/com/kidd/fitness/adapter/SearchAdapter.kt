@@ -34,8 +34,6 @@ class SearchAdapter(context: Context) : EndlessLoadingRecyclerViewAdapter(contex
     override fun bindNormalViewHolder(holder: NormalViewHolder, position: Int) {
         val searchViewHolder = holder as SearchViewHolder
         val search = getItem(position, User::class.java)!!
-        searchViewHolder.itemView.tv_id.text = search.id.toString()
-        searchViewHolder.itemView.tv_title.text = search.name
     }
 
     class SearchViewHolder(view: View) : NormalViewHolder(view)

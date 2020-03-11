@@ -1,4 +1,14 @@
 <resources>
-    <string name="app_name">MVVMBaseKotlin</string>
+    <string name="app_name">Fitness</string>
     <string name="error_place_holder">Error Happend.Try again!</string>
+    <string name="dash_board">Trang chủ</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="not_have_account">Chưa có tài khoản</string>
+    <string name="create_an_account">Đăng ký</string>
+    <string name="email">email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="loading">Loading …</string>
+    <string name="enter_food">Nhập tên món ăn</string>
+    <string name="enter_calo">Nhập calo (kcal/100g)</string>
+    <string name="insert_food">Hoàn tất</string>
 </resources>

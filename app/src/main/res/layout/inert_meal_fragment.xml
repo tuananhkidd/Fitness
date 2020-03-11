@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.kidd.fitness.ui.insert_food.InertMealFragment">
+
+    <com.kidd.fitness.custom.BaseToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:icon_left="@drawable/ic_back"
+        app:toolbar_background="@color/colorPrimary"
+        app:toolbar_title="Thêm món ăn" />
+
+    <com.kidd.fitness.custom.ClearableEditText
+        android:id="@+id/edt_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:layout_marginBottom="@dimen/margin_16_dp"
+        android:hint="@string/enter_food"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:textSize="@dimen/textsize_16_sp"
+        app:clearButtonDrawable="@drawable/ic_close_gray"
+        app:edtBackground="@drawable/round_border_edit_text"
+        app:edtPadding="@dimen/margin_10_dp" />
+
+    <com.kidd.fitness.custom.ClearableEditText
+        android:id="@+id/edt_calo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:layout_marginBottom="@dimen/margin_16_dp"
+        android:hint="@string/enter_calo"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/black"
+        android:textSize="@dimen/textsize_16_sp"
+        app:clearButtonDrawable="@drawable/ic_close_gray"
+        app:edtBackground="@drawable/round_border_edit_text"
+        app:edtPadding="@dimen/margin_10_dp" />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_time"
+        android:background="@drawable/round_border_edit_text"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_insert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/lato_bold"
+        android:text="@string/insert_food" />
+
+</LinearLayout>

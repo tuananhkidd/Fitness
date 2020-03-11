@@ -1,11 +1,74 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="BaseToolbar">
+        <attr name="icon_left" format="reference" />
+        <attr name="icon_right" format="reference" />
+        <attr name="toolbar_title" format="string" />
+        <attr name="toolbar_background" format="reference" />
+    </declare-styleable>
+
+    <style name="RegisCard" parent="CardView">
+        <item name="android:layout_marginStart">@dimen/margin_8_dp</item>
+        <item name="android:layout_marginEnd">@dimen/margin_8_dp</item>
+        <item name="cardCornerRadius">@dimen/radius_20_dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/margin_10_dp</item>
+    </style>
+
+    <style name="AppTheme.WhiteAccent">
+        <item name="colorAccent">@color/md_white_1000</item> <!-- Whatever color you want-->
+    </style>
+
+    <attr name="edtPadding" format="dimension"/>
+    <attr name="edtIcon" format="integer|reference"/>
+    <attr name="edtUnderlineColor" format="color"/>
+    <attr name="edtBackground" format="integer|reference"/>
+    <attr name="edtGravityCentered" format="boolean"/>
+    <attr name="clearButtonDrawable" format="integer|reference"/>
+    <attr name="clearButtonSize" format="dimension"/>
+    <attr name="edtEditable" format="boolean"/>
+    <attr name="edtMaxLength" format="integer"/>
+
+    <declare-styleable name="ClearableEditText">
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:hint"/>
+        <attr name="android:lines"/>
+        <attr name="android:inputType"/>
+        <attr name="android:textColorHint"/>
+        <attr name="edtMaxLength"/>
+        <attr name="edtGravityCentered"/>
+        <attr name="edtPadding"/>
+        <attr name="edtUnderlineColor" />
+        <attr name="edtBackground"/>
+        <attr name="edtIcon" />
+        <attr name="edtEditable"/>
+        <attr name="clearButtonDrawable"/>
+        <attr name="clearButtonSize"/>
+    </declare-styleable>
+
+    <declare-styleable name="PasswordEditText">
+        <attr name="android:text"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textSize"/>
+        <attr name="android:hint"/>
+        <attr name="android:textColorHint"/>
+        <attr name="edtGravityCentered"/>
+        <attr name="edtPadding"/>
+        <attr name="edtIcon"/>
+        <attr name="edtUnderlineColor"/>
+        <attr name="edtBackground"/>
+        <attr name="toggleButtonDrawable" format="integer"/>
+        <attr name="toggleButtonSize" format="dimension"/>
+    </declare-styleable>
 </resources>

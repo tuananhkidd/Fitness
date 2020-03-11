@@ -3,9 +3,12 @@ package com.kidd.fitness.extension
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.viewpager.widget.ViewPager
 
 fun View.visible() {
@@ -58,7 +61,11 @@ infix fun ViewPager.pageChangeListener(init: OnPageChangeListenerWrapper.() -> U
             wrapper.onPageScrollStateChanged?.invoke(state)
         }
 
-        override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
             wrapper.onPageScrolled?.invoke(position, positionOffset, positionOffsetPixels)
         }
 
@@ -77,10 +84,15 @@ fun View.showKeyboard() {
 
 fun View.hideKeyboard(): Boolean {
     try {
-        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
-    } catch (ignored: RuntimeException) { }
+    } catch (ignored: RuntimeException) {
+    }
     return false
 }
 
+fun ViewGroup.inflate(@LayoutRes layout: Int): View {
+    return LayoutInflater.from(context).inflate(layout, this, false)
+}
 
