@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ViewController<T extends BaseFragment> {
 
@@ -75,7 +76,7 @@ public class ViewController<T extends BaseFragment> {
         }
     }
 
-    public void addFragment(Class<T> type, HashMap<String, Object> data, boolean hasAnimation, boolean isHideOldFragment) {
+    public void addFragment(Class<T> type, Map<String, Object> data, boolean hasAnimation, boolean isHideOldFragment) {
         /*
         // Comment: open two notification at the same time, will open two instances of a fragment
         if (currentFragment != null && currentFragment.getClass().getName().equalsIgnoreCase(type.getName())) {
@@ -164,7 +165,7 @@ public class ViewController<T extends BaseFragment> {
         addFragmentUpAnimation(type, data, true);
     }
 
-    public void addFragment(Class<T> type, HashMap<String, Object> data) {
+    public void addFragment(Class<T> type, Map<String, Object> data) {
         addFragment(type, data, true, true);
     }
 

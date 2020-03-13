@@ -41,7 +41,6 @@
         android:layout_marginBottom="@dimen/margin_16_dp"
         android:hint="@string/enter_target_kcal"
         android:inputType="number"
-        android:text="1115"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="@dimen/textsize_16_sp"

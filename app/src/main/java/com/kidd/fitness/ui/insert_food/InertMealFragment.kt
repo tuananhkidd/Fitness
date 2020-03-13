@@ -40,7 +40,7 @@ class InertMealFragment : BaseFragment() {
                 Food(
                     System.currentTimeMillis().toString(),
                     edt_name.text,
-                    edt_calo.text,
+                    edt_calo.text.toInt(),
                     spinnerTimerAdapter.getItem(spinner_time.selectedItemPosition)
                     )
             )

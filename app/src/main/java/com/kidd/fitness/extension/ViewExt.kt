@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.viewpager.widget.ViewPager
@@ -36,7 +37,7 @@ fun View.onAvoidDoubleClick(
     }
 }
 
-infix fun TextView.textChangedListener(init: TextWatcherWrapper.() -> Unit) {
+infix fun EditText.textChangedListener(init: TextWatcherWrapper.() -> Unit) {
     val wrapper = TextWatcherWrapper().apply { init() }
     addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(p0: Editable) {

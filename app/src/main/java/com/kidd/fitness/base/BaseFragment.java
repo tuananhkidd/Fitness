@@ -68,7 +68,7 @@ public abstract class BaseFragment extends DaggerFragment {
         }
     }
 
-    public void setData(HashMap<String, Object> data) {
+    public void setData(Map<String, Object> data) {
         if (data == null || data.isEmpty()) {
             setArguments(new Bundle());
             return;

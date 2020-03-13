@@ -36,19 +36,21 @@
         android:layout_margin="@dimen/margin_10_dp"
         android:layout_marginBottom="@dimen/margin_16_dp"
         android:hint="@string/enter_calo"
+        android:inputType="number"
         android:textColor="@android:color/black"
         android:textColorHint="@android:color/black"
         android:textSize="@dimen/textsize_16_sp"
         app:clearButtonDrawable="@drawable/ic_close_gray"
         app:edtBackground="@drawable/round_border_edit_text"
+        app:edtMaxLength="6"
         app:edtPadding="@dimen/margin_10_dp" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinner_time"
-        android:background="@drawable/round_border_edit_text"
-        android:layout_margin="@dimen/margin_10_dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10_dp"
+        android:background="@drawable/round_border_edit_text" />
 
     <Button
         android:id="@+id/btn_insert"
