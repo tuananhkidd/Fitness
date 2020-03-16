@@ -14,4 +14,9 @@
     <string name="enter_target_kcal">Nhập mục tiêu kcal</string>
     <string name="enter_weight">Nhập khối lượng (g)</string>
     <string name="confirm">Xác nhận</string>
+    <string name="register">Đăng ký</string>
+    <string name="create_new_account">Đăng ký</string>
+    <string name="already_have_an_account">"Đã có tải khoản? "</string>
+    <string name="first_name">Họ tên</string>
+    <string name="confirm_password">Nhập lại mật khẩu</string>
 </resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/auth_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_24_dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_firebase" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="@string/register"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/margin_40_dp" />
+
+
+        <com.kidd.fitness.custom.ClearableEditText
+            android:id="@+id/edt_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16_dp"
+            android:hint="@string/first_name"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/textsize_18_sp"
+            app:clearButtonDrawable="@drawable/ic_close"
+            app:edtBackground="@drawable/round_border_edit_text"
+            app:edtIcon="@drawable/ic_user"
+            app:edtPadding="@dimen/margin_10_dp" />
+
+        <com.kidd.fitness.custom.ClearableEditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16_dp"
+            android:hint="@string/email"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/textsize_18_sp"
+            app:clearButtonDrawable="@drawable/ic_close"
+            app:edtBackground="@drawable/round_border_edit_text"
+            app:edtIcon="@drawable/ic_user"
+            app:edtPadding="@dimen/margin_10_dp" />
+
+        <com.kidd.fitness.custom.PasswordEditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16_dp"
+            android:hint="@string/password"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/textsize_18_sp"
+            app:edtBackground="@drawable/round_border_edit_text"
+            app:edtIcon="@drawable/ic_key"
+            app:edtPadding="@dimen/margin_10_dp"
+            app:toggleButtonDrawable="@drawable/password_edit_text_view_button_drawable" />
+
+        <com.kidd.fitness.custom.PasswordEditText
+            android:id="@+id/edt_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:hint="@string/confirm_password"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/textsize_18_sp"
+            app:edtBackground="@drawable/round_border_edit_text"
+            app:edtIcon="@drawable/ic_key"
+            app:edtPadding="@dimen/margin_10_dp"
+            app:toggleButtonDrawable="@drawable/password_edit_text_view_button_drawable" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16_dp"
+            android:background="@color/colorPrimary"
+            android:text="@string/create_new_account"
+            android:textColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:text="@string/already_have_an_account"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/txt_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_in"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

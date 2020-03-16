@@ -13,6 +13,7 @@ import com.kidd.fitness.base.BaseFragment
 import com.kidd.fitness.extension.getViewModel
 import com.kidd.fitness.extension.onAvoidDoubleClick
 import com.kidd.fitness.ui.home.HomeFragment
+import com.kidd.fitness.ui.register.RegisterFragment
 import kotlinx.android.synthetic.main.login_fragment.*
 
 class LoginFragment : BaseFragment() {
@@ -25,6 +26,10 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun backFromAddFragment() {
+        arguments?.let {
+            edt_email.text = it.getString("email")
+            it.remove("email")
+        }
     }
 
 
@@ -38,6 +43,10 @@ class LoginFragment : BaseFragment() {
         viewModel.login.observe(this, Observer {
             handleObjectResponse(it)
         })
+
+        txt_create_new_account.onAvoidDoubleClick {
+            viewController.addFragment(RegisterFragment::class.java,null)
+        }
     }
 
     override fun <U : Any?> getObjectResponse(data: U) {

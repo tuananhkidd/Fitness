@@ -19,56 +19,77 @@ class UserMealViewModel @Inject constructor(var userRepository: UserRepository) 
     val userTargetCalo = MutableLiveData<BaseObjectResponse<UserMeal?>>()
     val createOrUpdate = MutableLiveData<BaseObjectResponse<Boolean>>()
     var userMealDocumentId = ""
+
+    init {
+//        listenerChange()
+    }
+
     fun createOrUpdateUserMeal(calo: Int) {
         createOrUpdate.value = BaseObjectResponse<Boolean>().loading()
         val document = FirebaseFirestore.getInstance()
             .collection(Define.FOODS_COLLECTION)
             .document(userRepository.getUserInfo()?.id!!)
             .collection(Define.USER_MEAL_COLLECTION)
-        document.whereEqualTo("createdDate", Date().format())
-            .addSnapshotListener { querySnapshot, e ->
-                Log.v("ahuhu","er ${e?.message}  + ${querySnapshot.toString()}")
-                for (dc in querySnapshot!!.documentChanges) {
-                    when (dc.type) {
-                        DocumentChange.Type.ADDED -> {
-                            val userMeal =
-                                UserMeal(
-                                    System.currentTimeMillis().toString(),
-                                    calo,
-                                    Date().format()
-                                )
-                            document.document()
-                                .set(userMeal)
-                                .addOnSuccessListener {
-                                    userMealDocumentId = dc.document.id
-                                    userTargetCalo.value =
-                                        BaseObjectResponse<UserMeal?>().success(userMeal)
-                                    createOrUpdate.value =
-                                        BaseObjectResponse<Boolean>().success(true)
+        val query = document.whereEqualTo("createdDate", Date().format())
+        query.get().addOnSuccessListener { snapshot ->
+            if (snapshot.documents.isEmpty()) {
+                val userMeal =
+                    UserMeal(
+                        System.currentTimeMillis().toString(),
+                        calo,
+                        Date().format()
+                    )
+                document.document()
+                    .set(userMeal)
+                    .addOnSuccessListener {
+                        userTargetCalo.value = BaseObjectResponse<UserMeal?>().success(userMeal)
+                        query.addSnapshotListener { querySnapshot, _ ->
+                            run {
+                                querySnapshot?.documentChanges?.forEach {
+                                    if (it.type == DocumentChange.Type.ADDED) {
+                                        userMealDocumentId = it.document.id
+                                        createOrUpdate.value =
+                                            BaseObjectResponse<Boolean>().success(true)
+                                    }
                                 }
-                                .addOnFailureListener { e ->
-                                    createOrUpdate.value = BaseObjectResponse<Boolean>().error(e)
-                                }
-                        }
-                        DocumentChange.Type.MODIFIED -> {
-                            document.document(querySnapshot.first().id)
-                                .update("target_calo", calo)
-                                .addOnSuccessListener {
-                                    userMealDocumentId = dc.document.id
-                                    userTargetCalo.value?.data?.target_calo = calo
-                                    userTargetCalo.value =
-                                        BaseObjectResponse<UserMeal?>().success(userTargetCalo.value?.data)
-                                    createOrUpdate.value =
-                                        BaseObjectResponse<Boolean>().success(true)
-                                }
-                                .addOnFailureListener { e ->
-                                    createOrUpdate.value = BaseObjectResponse<Boolean>().error(e)
-                                }
+                            }
                         }
                     }
-                }
+                    .addOnFailureListener { e ->
+                        createOrUpdate.value = BaseObjectResponse<Boolean>().error(e)
+                    }
+            } else {
+                document.document(snapshot.documents.first().id)
+                    .update("target_calo", calo)
+                    .addOnSuccessListener {
+                        userMealDocumentId = snapshot.documents.first().id
+                        userTargetCalo.value?.data?.target_calo = calo
+                        userTargetCalo.value =
+                            BaseObjectResponse<UserMeal?>().success(userTargetCalo.value?.data)
+                        createOrUpdate.value =
+                            BaseObjectResponse<Boolean>().success(true)
+                    }
+                    .addOnFailureListener { e ->
+                        createOrUpdate.value = BaseObjectResponse<Boolean>().error(e)
+                    }
             }
+        }
 
+
+//            .addSnapshotListener { querySnapshot, e ->
+//                Log.v("ahuhu", "er ${e?.message}  + ${querySnapshot.toString()}")
+//            }
+    }
+
+    private fun listenerChange() {
+        val document = FirebaseFirestore.getInstance()
+            .collection(Define.FOODS_COLLECTION)
+            .document(userRepository.getUserInfo()?.id!!)
+            .collection(Define.USER_MEAL_COLLECTION)
+        document.whereEqualTo("createdDate", Date().format())
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+
+            }
     }
 
     private fun getQuery(): Task<QuerySnapshot> {

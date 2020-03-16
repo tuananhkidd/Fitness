@@ -183,7 +183,7 @@ public abstract class BaseActivity extends DaggerAppCompatActivity {
             requestError.setErrorMessage(getString(R.string.error_place_holder));
         } else {
             requestError.setErrorCode(Define.Api.UNKNOWN);
-            requestError.setErrorMessage(getString(R.string.error_place_holder));
+            requestError.setErrorMessage(throwable.getMessage());
         }
 
         if (isShowDialog && requestError != null) {

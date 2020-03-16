@@ -1,5 +1,6 @@
 package com.kidd.fitness.ui.home
 
+import androidx.lifecycle.Observer
 import com.kidd.fitness.R
 import com.kidd.fitness.base.BaseFragment
 import com.kidd.fitness.extension.getViewModel
@@ -34,5 +35,9 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initData() {
+        txt_user.isSelected  = true
+        viewModel.userInfo.observe(this, Observer {
+            txt_user.text = "Xin chào ${it.name}"
+        })
     }
 }

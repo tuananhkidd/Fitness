@@ -169,7 +169,7 @@ public class ViewController<T extends BaseFragment> {
         addFragment(type, data, true, true);
     }
 
-    public boolean backFromAddFragment(HashMap<String, Object> data) {
+    public boolean backFromAddFragment(Map<String, Object> data) {
         if (listAddFragment.size() >= 2) {
             listAddFragment.remove(listAddFragment.size() - 1);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

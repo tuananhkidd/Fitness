@@ -28,6 +28,8 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
     var spinnerFood =
         MutableLiveData<BaseObjectResponse<Pair<Pair<Int, List<Food>>, UserMealDetail?>>>()
 
+    var createMealFlag = MutableLiveData<BaseObjectResponse<Boolean>>()
+
     private fun getListFood() {
         val foodCollection = FirebaseFirestore.getInstance()
             .collection(Define.FOODS_COLLECTION)
@@ -104,6 +106,7 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
                 userMeal?.evening_calo = foodWeight * calo
             }
         }
+        createMealFlag.value = BaseObjectResponse<Boolean>().loading()
         userMealDetailsId?.let {
             getUserMealDetailDoc().document(it).set(userMealDetail)
                 .addOnSuccessListener {
@@ -126,8 +129,12 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
             .document(userMealDoc)
             .update(fieldUpdate, calo)
             .addOnSuccessListener {
-
+                createMealFlag.value = BaseObjectResponse<Boolean>().success(true)
             }
+            .addOnFailureListener{
+                createMealFlag.value = BaseObjectResponse<Boolean>().error(it)
+            }
+
     }
 
     private fun getUserMealDetailDoc(): CollectionReference {

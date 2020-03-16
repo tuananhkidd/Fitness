@@ -4,16 +4,15 @@ import android.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import com.kidd.fitness.R
 import com.kidd.fitness.adapter.spinner.SpinnerFoodAdapter
 import com.kidd.fitness.base.BaseFragment
 import com.kidd.fitness.entity.Food
 import com.kidd.fitness.entity.UserMealDetail
-import com.kidd.fitness.extension.getViewModel
-import com.kidd.fitness.extension.gone
-import com.kidd.fitness.extension.onAvoidDoubleClick
-import com.kidd.fitness.extension.visible
+import com.kidd.fitness.extension.*
 import com.kidd.fitness.ui.meal.UserMealFragment
 import com.kidd.fitness.utils.Define
 import kotlinx.android.synthetic.main.create_meal_fragment.*
@@ -50,14 +49,21 @@ class CreateMealFragment : BaseFragment() {
             tv_morning_calo.text = viewModel.userMeal?.morning_calo.toString()
             tv_afternoon_calo.text = viewModel.userMeal?.afternoon_calo.toString()
             tv_evening_calo.text = viewModel.userMeal?.evening_calo.toString()
+            tv_total_calo_remain.text =
+                (viewModel.userMeal?.target_calo!! - viewModel.userMeal?.morning_calo!!
+                        - viewModel.userMeal?.afternoon_calo!! - viewModel.userMeal?.evening_calo!!).toString()
         }
+
+        viewModel.createMealFlag.observe(this, Observer {
+            handleObjectResponse(it)
+        })
 
         btn_confirm.onAvoidDoubleClick {
             if (edt_weight.text.isNullOrEmpty()) {
                 edt_weight.setError("Khối lượng không được để trống")
                 return@onAvoidDoubleClick
             }
-            if (tv_total_calo.text.toString().toInt() > viewModel.userMeal?.target_calo!!) {
+            if (tv_total_calo.text.toString().toInt() > getTotalRemainCalo()) {
                 edt_weight.setError("Calo đã vượt mức quy định!")
                 return@onAvoidDoubleClick
             }
@@ -88,6 +94,13 @@ class CreateMealFragment : BaseFragment() {
                             viewModel.userMeal?.evening_calo!!).toString()
                 }
             }
+
+            is Boolean -> {
+                if(data){
+                    toast("Cập nhật thành công!")
+                    viewController.backFromAddFragment(null)
+                }
+            }
         }
     }
 
@@ -106,7 +119,7 @@ class CreateMealFragment : BaseFragment() {
                 if (!p0.isNullOrBlank()) {
                     val totalCalo =
                         (spinnerFoodAdapter.getItem(spinner_food.selectedItemPosition).calo * edt_weight.text.toInt())
-                    if (totalCalo > getTotalRemainCalo(totalCalo)) {
+                    if (totalCalo > getTotalRemainCalo()) {
                         showDialogAlert()
                         edt_weight.apply {
                             text = p0.substring(0, p0.length - 1)
@@ -142,6 +155,23 @@ class CreateMealFragment : BaseFragment() {
                 layout_afternoon.visible()
                 layout_evening.gone()
                 layout_morning.visible()
+            }
+        }
+
+        spinner_food.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if (!edt_weight.text.isNullOrBlank()) {
+                    val totalCalo =
+                        (spinnerFoodAdapter.getItem(p2).calo * edt_weight.text.toInt())
+                    tv_total_calo.text = totalCalo.toString()
+                    if (totalCalo > getTotalRemainCalo()) {
+                        showDialogAlert()
+                    }
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ import com.kidd.fitness.ui.insert_food.InertMealFragment
 import com.kidd.fitness.ui.insert_meal.CreateMealFragment
 import com.kidd.fitness.ui.login.LoginFragment
 import com.kidd.fitness.ui.meal.UserMealFragment
+import com.kidd.fitness.ui.register.RegisterFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -28,4 +29,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract fun bindLoginFragment(): LoginFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindRegisterFragment(): RegisterFragment
 }
