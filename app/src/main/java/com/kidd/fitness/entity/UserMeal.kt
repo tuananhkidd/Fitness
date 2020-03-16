@@ -4,34 +4,34 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class UserMeal constructor() : Parcelable{
-    constructor( id: String, target_calo: Int,createdDate: String) : this() {
+    constructor( id: String, target_calo: Double,createdDate: String) : this() {
         this.id = id
         this.target_calo = target_calo
         this.createdDate = createdDate
     }
     var id: String = ""
-    var target_calo: Int = 0
+    var target_calo: Double = 0.0
     var createdDate: String = ""
-    var morning_calo:Int = 0
-    var afternoon_calo:Int = 0
-    var evening_calo:Int = 0
+    var morning_calo:Double = 0.0
+    var afternoon_calo:Double = 0.0
+    var evening_calo:Double = 0.0
 
     constructor(parcel: Parcel) : this() {
         id = parcel.readString().toString()
-        target_calo = parcel.readInt()
+        target_calo = parcel.readDouble()
         createdDate = parcel.readString().toString()
-        morning_calo = parcel.readInt()
-        afternoon_calo = parcel.readInt()
-        evening_calo = parcel.readInt()
+        morning_calo = parcel.readDouble()
+        afternoon_calo = parcel.readDouble()
+        evening_calo = parcel.readDouble()
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-        parcel.writeInt(target_calo)
+        parcel.writeDouble(target_calo)
         parcel.writeString(createdDate)
-        parcel.writeInt(morning_calo)
-        parcel.writeInt(afternoon_calo)
-        parcel.writeInt(evening_calo)
+        parcel.writeDouble(morning_calo)
+        parcel.writeDouble(afternoon_calo)
+        parcel.writeDouble(evening_calo)
     }
 
     override fun describeContents(): Int {

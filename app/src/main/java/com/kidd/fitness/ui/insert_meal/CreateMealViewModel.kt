@@ -86,7 +86,7 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
         }
     }
 
-    fun createUserMealDetail(foodId: String, calo: Int, foodName: String, foodWeight: Int) {
+    fun createUserMealDetail(foodId: String, calo: Double, foodName: String, foodWeight: Int) {
         val userMealDetail = UserMealDetail()
         userMealDetail.foodId = foodId
         userMealDetail.foodName = foodName
@@ -121,7 +121,7 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
         }
     }
 
-    private fun updateUserMealCalo(fieldUpdate:String,calo:Int){
+    private fun updateUserMealCalo(fieldUpdate:String,calo:Double){
         FirebaseFirestore.getInstance()
             .collection(Define.FOODS_COLLECTION)
             .document(userRepository.getUserInfo()?.id!!)

@@ -11,6 +11,8 @@ import com.kidd.fitness.extension.getViewModel
 import com.kidd.fitness.extension.onAvoidDoubleClick
 import com.kidd.fitness.extension.toast
 import kotlinx.android.synthetic.main.inert_meal_fragment.*
+import kotlinx.android.synthetic.main.inert_meal_fragment.toolbar
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 
 class InertMealFragment : BaseFragment() {
@@ -40,7 +42,7 @@ class InertMealFragment : BaseFragment() {
                 Food(
                     System.currentTimeMillis().toString(),
                     edt_name.text,
-                    edt_calo.text.toInt(),
+                    edt_calo.text.toDouble(),
                     spinnerTimerAdapter.getItem(spinner_time.selectedItemPosition)
                     )
             )
@@ -48,9 +50,11 @@ class InertMealFragment : BaseFragment() {
 
         toolbar.setOnToolbarClickListener(object :BaseToolbar.OnToolbarClickListener{
             override fun onClick(id: Int) {
-//                when(id){
-//                    is R.id.im
-//                }
+                when(id){
+                    imv_left.id->{
+                        viewController.backFromAddFragment(null)
+                    }
+                }
             }
         })
 

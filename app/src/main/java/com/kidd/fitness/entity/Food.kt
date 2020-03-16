@@ -6,7 +6,7 @@ import java.util.*
 class Food(
     val id: String = "",
     val name: String = "",
-    val calo: Int = 0,
+    val calo: Double= 0.0,
     val dailyTime :DailyTime = DailyTime.EVENING,
     @ServerTimestamp
     val createdDate: Date = Date()

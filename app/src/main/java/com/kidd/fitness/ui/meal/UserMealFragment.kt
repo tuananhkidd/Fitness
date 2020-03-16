@@ -4,12 +4,15 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import com.kidd.fitness.R
 import com.kidd.fitness.base.BaseFragment
+import com.kidd.fitness.custom.BaseToolbar
 import com.kidd.fitness.entity.UserMeal
 import com.kidd.fitness.extension.getViewModel
 import com.kidd.fitness.extension.onAvoidDoubleClick
 import com.kidd.fitness.ui.insert_meal.CreateMealFragment
 import com.kidd.fitness.utils.Define
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.android.synthetic.main.user_meal_fragment.*
+import kotlinx.android.synthetic.main.user_meal_fragment.toolbar
 
 
 class UserMealFragment : BaseFragment() {
@@ -58,6 +61,14 @@ class UserMealFragment : BaseFragment() {
         viewModel.createOrUpdate.observe(this, Observer {
             handleObjectResponse(it)
         })
+
+        toolbar.setOnToolbarClickListener(object :BaseToolbar.OnToolbarClickListener{
+            override fun onClick(id: Int) {
+                if(id == imv_left.id){
+                    viewController.backFromAddFragment(null)
+                }
+            }
+        })
     }
 
     override fun <U : Any?> getObjectResponse(data: U) {
@@ -79,7 +90,7 @@ class UserMealFragment : BaseFragment() {
         if (edt_kcal.text.isNullOrEmpty()) {
             edt_kcal.setError("Calo không được để trống")
         }
-        viewModel.createOrUpdateUserMeal(edt_kcal.text.toInt())
+        viewModel.createOrUpdateUserMeal(edt_kcal.text.toDouble())
     }
 
     override fun initData() {

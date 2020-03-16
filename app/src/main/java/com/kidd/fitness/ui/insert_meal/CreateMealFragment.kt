@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.kidd.fitness.R
 import com.kidd.fitness.adapter.spinner.SpinnerFoodAdapter
 import com.kidd.fitness.base.BaseFragment
+import com.kidd.fitness.custom.BaseToolbar
 import com.kidd.fitness.entity.Food
 import com.kidd.fitness.entity.UserMealDetail
 import com.kidd.fitness.extension.*
@@ -45,13 +46,13 @@ class CreateMealFragment : BaseFragment() {
             )
 
             viewModel.userMeal = it.getParcelable(UserMealFragment.KEY_USER_MEAL)
-            tv_calo.text = viewModel.userMeal?.target_calo.toString()
-            tv_morning_calo.text = viewModel.userMeal?.morning_calo.toString()
-            tv_afternoon_calo.text = viewModel.userMeal?.afternoon_calo.toString()
-            tv_evening_calo.text = viewModel.userMeal?.evening_calo.toString()
+            tv_calo.text = viewModel.userMeal?.target_calo.format()
+            tv_morning_calo.text = viewModel.userMeal?.morning_calo.format()
+            tv_afternoon_calo.text = viewModel.userMeal?.afternoon_calo.format()
+            tv_evening_calo.text = viewModel.userMeal?.evening_calo.format()
             tv_total_calo_remain.text =
                 (viewModel.userMeal?.target_calo!! - viewModel.userMeal?.morning_calo!!
-                        - viewModel.userMeal?.afternoon_calo!! - viewModel.userMeal?.evening_calo!!).toString()
+                        - viewModel.userMeal?.afternoon_calo!! - viewModel.userMeal?.evening_calo!!).format()
         }
 
         viewModel.createMealFlag.observe(this, Observer {
@@ -74,6 +75,12 @@ class CreateMealFragment : BaseFragment() {
                 edt_weight.text.toInt()
             )
         }
+
+        toolbar.setOnToolbarClickListener(object : BaseToolbar.OnToolbarClickListener {
+            override fun onClick(id: Int) {
+                viewController.backFromAddFragment(null)
+            }
+        })
     }
 
     override fun <U : Any?> getObjectResponse(data: U) {
@@ -96,7 +103,7 @@ class CreateMealFragment : BaseFragment() {
             }
 
             is Boolean -> {
-                if(data){
+                if (data) {
                     toast("Cập nhật thành công!")
                     viewController.backFromAddFragment(null)
                 }
@@ -118,7 +125,7 @@ class CreateMealFragment : BaseFragment() {
                 Log.v("ahuhu", "onTextChanged $p0")
                 if (!p0.isNullOrBlank()) {
                     val totalCalo =
-                        (spinnerFoodAdapter.getItem(spinner_food.selectedItemPosition).calo * edt_weight.text.toInt())
+                        (100 * edt_weight.text.toInt()) / spinnerFoodAdapter.getItem(spinner_food.selectedItemPosition).calo
                     if (totalCalo > getTotalRemainCalo()) {
                         showDialogAlert()
                         edt_weight.apply {
@@ -158,7 +165,7 @@ class CreateMealFragment : BaseFragment() {
             }
         }
 
-        spinner_food.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinner_food.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
 
             }
@@ -193,7 +200,7 @@ class CreateMealFragment : BaseFragment() {
         tv_total_calo_remain.text = (viewModel.userMeal?.target_calo!! - calo).toString()
     }
 
-    private fun getTotalRemainCalo(calo: Int = 0): Int {
+    private fun getTotalRemainCalo(calo: Double = 0.0): Double {
         when (viewModel.timeDoc) {
             Define.MORNING -> {
                 return viewModel.userMeal?.target_calo!! - viewModel.userMeal?.evening_calo!! - viewModel.userMeal?.afternoon_calo!! - calo
@@ -205,7 +212,7 @@ class CreateMealFragment : BaseFragment() {
                 return viewModel.userMeal?.target_calo!! - viewModel.userMeal?.morning_calo!! - viewModel.userMeal?.afternoon_calo!! - calo
             }
             else -> {
-                return 0
+                return 0.0
             }
         }
     }

@@ -24,7 +24,7 @@ class UserMealViewModel @Inject constructor(var userRepository: UserRepository) 
 //        listenerChange()
     }
 
-    fun createOrUpdateUserMeal(calo: Int) {
+    fun createOrUpdateUserMeal(calo: Double) {
         createOrUpdate.value = BaseObjectResponse<Boolean>().loading()
         val document = FirebaseFirestore.getInstance()
             .collection(Define.FOODS_COLLECTION)
