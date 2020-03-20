@@ -1,6 +1,7 @@
 package com.kidd.fitness.di.module
 
 import com.kidd.fitness.ui.SplashFragment
+import com.kidd.fitness.ui.history.HistoryFragment
 import com.kidd.fitness.ui.home.HomeFragment
 import com.kidd.fitness.ui.insert_food.InertMealFragment
 import com.kidd.fitness.ui.insert_meal.CreateMealFragment
@@ -32,4 +33,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector
     abstract fun bindRegisterFragment(): RegisterFragment
+
+    @ContributesAndroidInjector
+    abstract fun bindHistoryFragment(): HistoryFragment
 }

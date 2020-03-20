@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.kidd.fitness.di.ViewModelFactory
 import com.kidd.fitness.ui.SplashViewModel
+import com.kidd.fitness.ui.history.HistoryViewModel
 import com.kidd.fitness.ui.home.HomeViewModel
 import com.kidd.fitness.ui.insert_food.InertMealViewModel
 import com.kidd.fitness.ui.insert_meal.CreateMealViewModel
@@ -53,6 +54,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RegisterViewModel::class)
     internal abstract fun bindRegisterViewModel(viewModel: RegisterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoryViewModel::class)
+    internal abstract fun bindHistoryViewModel(viewModel: HistoryViewModel): ViewModel
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

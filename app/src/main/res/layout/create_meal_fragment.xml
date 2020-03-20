@@ -110,11 +110,13 @@
         app:layout_constraintStart_toEndOf="@id/tv_calo_remain_title"
         app:layout_constraintTop_toTopOf="@id/tv_calo_remain_title"
         tools:text="12203" />
-    <include layout="@layout/layout_calo"
+
+    <include
         android:id="@+id/layout"
+        layout="@layout/layout_calo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_total_calo_remain"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_total_calo_remain" />
 
     <Button
         android:id="@+id/btn_confirm"

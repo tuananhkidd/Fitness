@@ -64,7 +64,7 @@ class CreateMealFragment : BaseFragment() {
                 edt_weight.setError("Khối lượng không được để trống")
                 return@onAvoidDoubleClick
             }
-            if (tv_total_calo.text.toString().toInt() > getTotalRemainCalo()) {
+            if (tv_total_calo.text.toString().toDouble() > getTotalRemainCalo()) {
                 edt_weight.setError("Calo đã vượt mức quy định!")
                 return@onAvoidDoubleClick
             }
@@ -125,20 +125,20 @@ class CreateMealFragment : BaseFragment() {
                 Log.v("ahuhu", "onTextChanged $p0")
                 if (!p0.isNullOrBlank()) {
                     val totalCalo =
-                        (100 * edt_weight.text.toInt()) / spinnerFoodAdapter.getItem(spinner_food.selectedItemPosition).calo
+                        (spinnerFoodAdapter.getItem(spinner_food.selectedItemPosition).calo * edt_weight.text.toInt()) / 100
                     if (totalCalo > getTotalRemainCalo()) {
                         showDialogAlert()
                         edt_weight.apply {
                             text = p0.substring(0, p0.length - 1)
                         }
                     } else {
-                        tv_total_calo.text = totalCalo.toString()
-                        tv_total_calo_remain.text = getTotalRemainCalo(totalCalo).toString()
+                        tv_total_calo.text = totalCalo.format()
+                        tv_total_calo_remain.text = getTotalRemainCalo(totalCalo).format()
                     }
 
                 } else {
                     tv_total_calo.text = null
-                    tv_total_calo_remain.text = getTotalRemainCalo().toString()
+                    tv_total_calo_remain.text = getTotalRemainCalo().toString().format()
 
                 }
             }
@@ -173,8 +173,9 @@ class CreateMealFragment : BaseFragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (!edt_weight.text.isNullOrBlank()) {
                     val totalCalo =
-                        (spinnerFoodAdapter.getItem(p2).calo * edt_weight.text.toInt())
-                    tv_total_calo.text = totalCalo.toString()
+                        (spinnerFoodAdapter.getItem(p2).calo * edt_weight.text.toInt())/100
+                    tv_total_calo.text = totalCalo.format()
+                    tv_total_calo_remain.text = (viewModel.userMeal?.target_calo!! - totalCalo).format()
                     if (totalCalo > getTotalRemainCalo()) {
                         showDialogAlert()
                     }
@@ -197,7 +198,7 @@ class CreateMealFragment : BaseFragment() {
     }
 
     private fun updateTotalRemainCalo(calo: Int = 0) {
-        tv_total_calo_remain.text = (viewModel.userMeal?.target_calo!! - calo).toString()
+        tv_total_calo_remain.text = (viewModel.userMeal?.target_calo!! - calo).format()
     }
 
     private fun getTotalRemainCalo(calo: Double = 0.0): Double {

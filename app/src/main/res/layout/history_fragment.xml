@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.kidd.fitness.ui.history.HistoryFragment">
+
+        <com.kidd.fitness.custom.BaseToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon_left="@drawable/ic_back"
+            app:icon_right="@drawable/ic_clock_white"
+            app:toolbar_background="@color/colorPrimary"
+            app:toolbar_title="Lịch sử" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            tools:text="Ngày 12/12/2019"
+            style="@style/TextBold"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.kidd.fitness.custom.TextComponent
+            android:id="@+id/txt_target"
+            app:title="Mục tiêu calo :"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.kidd.fitness.custom.TextComponent
+            android:id="@+id/txt_morning"
+            app:title="Calo buổi sáng :"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.kidd.fitness.custom.TextComponent
+            android:id="@+id/txt_afternoon"
+            app:title="Calo buổi trưa :"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <com.kidd.fitness.custom.TextComponent
+            android:id="@+id/txt_evening"
+            app:title="Calo buổi tối :"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

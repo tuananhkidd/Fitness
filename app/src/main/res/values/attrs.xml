@@ -9,4 +9,11 @@
         <attr name="brv_enable_refresh" format="boolean" />
         <attr name="brv_text_no_result" format="string|reference" />
     </declare-styleable>
+
+    <declare-styleable name="TextComponent">
+        <attr name="title" format="string" />
+        <attr name="detail" format="string" />
+        <attr name="visible_ic" format="boolean" />
+        <attr name="ic_info" format="reference" />
+    </declare-styleable>
 </resources>
