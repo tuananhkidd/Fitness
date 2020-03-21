@@ -91,37 +91,37 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
         userMealDetail.foodId = foodId
         userMealDetail.foodName = foodName
         userMealDetail.foodWeight = foodWeight
-        var fieldUpdate =  ""
+        var fieldUpdate = ""
         when (timeDoc) {
             Define.MORNING -> {
                 fieldUpdate = "morning_calo"
-                userMeal?.morning_calo = foodWeight * calo
+                userMeal?.morning_calo = (foodWeight * calo) / 100
             }
             Define.AFTERNOON -> {
                 fieldUpdate = "afternoon_calo"
-                userMeal?.afternoon_calo = foodWeight * calo
+                userMeal?.afternoon_calo = (foodWeight * calo) / 100
             }
             Define.EVENING -> {
                 fieldUpdate = "evening_calo"
-                userMeal?.evening_calo = foodWeight * calo
+                userMeal?.evening_calo = (foodWeight * calo) / 100
             }
         }
         createMealFlag.value = BaseObjectResponse<Boolean>().loading()
         userMealDetailsId?.let {
             getUserMealDetailDoc().document(it).set(userMealDetail)
                 .addOnSuccessListener {
-                    updateUserMealCalo(fieldUpdate,foodWeight * calo)
+                    updateUserMealCalo(fieldUpdate, foodWeight * calo / 100)
                 }
 
         } ?: kotlin.run {
             getUserMealDetailDoc().document().set(userMealDetail)
                 .addOnSuccessListener {
-                    updateUserMealCalo(fieldUpdate,foodWeight * calo)
+                    updateUserMealCalo(fieldUpdate, foodWeight * calo / 100)
                 }
         }
     }
 
-    private fun updateUserMealCalo(fieldUpdate:String,calo:Double){
+    private fun updateUserMealCalo(fieldUpdate: String, calo: Double) {
         FirebaseFirestore.getInstance()
             .collection(Define.FOODS_COLLECTION)
             .document(userRepository.getUserInfo()?.id!!)
@@ -131,7 +131,7 @@ class CreateMealViewModel @Inject constructor(var userRepository: UserRepository
             .addOnSuccessListener {
                 createMealFlag.value = BaseObjectResponse<Boolean>().success(true)
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 createMealFlag.value = BaseObjectResponse<Boolean>().error(it)
             }
 

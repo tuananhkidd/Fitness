@@ -64,7 +64,7 @@ class CreateMealFragment : BaseFragment() {
                 edt_weight.setError("Khối lượng không được để trống")
                 return@onAvoidDoubleClick
             }
-            if (tv_total_calo.text.toString().toDouble() > getTotalRemainCalo()) {
+            if (tv_total_calo.text.toString().replaceDot()!!.toDouble() > getTotalRemainCalo()) {
                 edt_weight.setError("Calo đã vượt mức quy định!")
                 return@onAvoidDoubleClick
             }
